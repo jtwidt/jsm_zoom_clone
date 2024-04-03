@@ -15,7 +15,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     useGetCalls();
   const router = useRouter();
   const [recordings, setRecordings] = useState<CallRecording[]>([]);
-  const toast = useToast();
+  const { toast } = useToast();
 
   const getCalls = () => {
     switch (type) {
@@ -82,9 +82,9 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
                 : '/icons/recordings.svg'
             }
             title={
-              (meeting as Call).state?.custom.description.substring(0, 26) ||
-              meeting.filename.substring(0, 20) ||
-              'No description'
+              (meeting as Call).state?.custom?.description?.substring(0, 26) ||
+              meeting?.filename?.substring(0, 20) ||
+              'Personal Meeting'
             }
             date={
               meeting.state?.startsAt.toLocaleString() ||
